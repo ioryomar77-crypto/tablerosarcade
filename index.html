@@ -42,9 +42,9 @@
                 Diseños de Vinilo, Planos de Impresión y la <span class="highlight">Guía de Presupuestos</span> Definitiva.
             </h2>
             
-            <!-- CONTADOR DE URGENCIA (Simulado, debe ser funcional en un entorno real) -->
-            <div id="countdown" class="bg-red-800 bg-opacity-30 border border-red-600 rounded-lg p-3 mb-6 font-bold text-lg text-red-300">
-                ¡OFERTA RELÁMPAGO! SOLO QUEDAN <span class="text-3xl text-red-300">00:05:43</span>
+            <!-- CONTADOR DE URGENCIA (Funcional con JS) -->
+            <div class="bg-red-800 bg-opacity-30 border border-red-600 rounded-lg p-3 mb-6 font-bold text-lg text-red-300">
+                ¡OFERTA RELÁMPAGO! SOLO QUEDAN <span id="countdown-timer" class="text-3xl text-red-300"></span>
             </div>
 
             <!-- BOTÓN CTA PRINCIPAL -->
@@ -139,7 +139,7 @@
                 DESCARGAR AHORA Y EMPEZAR
             </a>
 
-            <p class="text-base font-semibold mt-4 text-green-400">
+            <p class="base font-semibold mt-4 text-green-400">
                 ¡GARANTÍA DE ÉXITO! Si tu proyecto falla siguiendo nuestra guía, te devolvemos tu dinero.
             </p>
         </section>
@@ -149,5 +149,36 @@
         </footer>
 
     </div>
+
+    <script>
+        // Función para simular el contador regresivo
+        function startCountdown() {
+            const countdownEl = document.getElementById('countdown-timer');
+            // Establecer un tiempo inicial de 10 minutos (600 segundos) para la demostración
+            let timeInSeconds = 600; 
+
+            function updateTimer() {
+                const minutes = String(Math.floor(timeInSeconds / 60)).padStart(2, '0');
+                const seconds = String(timeInSeconds % 60).padStart(2, '0');
+
+                countdownEl.textContent = `${minutes}:${seconds}`;
+
+                if (timeInSeconds <= 0) {
+                    clearInterval(timerInterval);
+                    countdownEl.textContent = "00:00";
+                    // Opcional: Deshabilitar o cambiar el CTA si el tiempo se agota
+                } else {
+                    timeInSeconds--;
+                }
+            }
+
+            // Actualizar el contador cada segundo
+            const timerInterval = setInterval(updateTimer, 1000);
+            updateTimer(); // Llamar inmediatamente para evitar un retraso de 1s
+        }
+
+        // Iniciar el contador cuando la página cargue
+        startCountdown();
+    </script>
 </body>
 </html>
