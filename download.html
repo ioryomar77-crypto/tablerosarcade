@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Gracias por tu Compra! - Descarga tu Pack Arcade</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117;
+            color: #ffffff;
+        }
+        .download-button {
+            background-image: linear-gradient(to right, #4ade80, #16a34a); /* Botón de descarga verde */
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(22, 163, 74, 0.6);
+        }
+        .download-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(22, 163, 74, 0.8);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <div class="max-w-md mx-auto text-center bg-gray-900 p-8 rounded-2xl shadow-2xl border border-green-700">
+        
+        <h1 class="text-4xl font-extrabold mb-4 text-green-400">
+            ¡Compra Exitosa! 🎉
+        </h1>
+        <p class="text-xl text-gray-300 mb-6">
+            Tu acceso al Pack Arcade PRO está listo.
+        </p>
+
+        <!-- Botón de Descarga que apunta al Google Drive -->
+        <a href="TU_ENLACE_PRIVADO_DE_GOOGLE_DRIVE" 
+           class="download-button w-full inline-block py-4 text-2xl font-black rounded-xl uppercase text-white tracking-widest transition duration-300" 
+           target="_blank">
+            HAZ CLIC AQUÍ PARA DESCARGAR
+        </a>
+
+        <div class="mt-8 p-4 bg-gray-800 rounded-lg text-left">
+            <h3 class="font-bold text-lg mb-2 text-yellow-400">Instrucciones Importantes:</h3>
+            <ul class="list-disc list-inside space-y-2 text-gray-400">
+                <li>Haz clic en el botón de arriba para acceder a la carpeta de Google Drive.</li>
+                <li>Guarda la carpeta completa o los archivos en tu PC lo antes posible.</li>
+                <li>Si tienes algún problema, contacta con soporte en: <a href="mailto:tuemail@dominio.com" class="underline text-blue-400">tuemail@dominio.com</a></li>
+            </ul>
+        </div>
+        
+    </div>
+</body>
+</html>
