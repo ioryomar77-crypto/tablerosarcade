@@ -3,284 +3,385 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pack Arcade PRO - La Guía Definitiva de Construcción</title>
-    <!-- Carga de Tailwind CSS para diseño responsivo y moderno -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Carga de Lucide Icons para elementos visuales -->
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <title>Pack Maestro Arcade Stick & Hitbox - Nivel Torneo</title>
+    <!-- Carga de Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configuración personalizada de Tailwind para colores neón y fuentes E-Sports --><script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'neon-cyan': '#00FFFF',
+                        'neon-magenta': '#FF00FF',
+                        'dark-bg': '#0A0A0A',
+                        'dark-card': '#181818',
+                        'darker-card': '#111111', 
+                    },
+                    fontFamily: {
+                        // Usaremos Inter como una fuente moderna y legible, adecuada para E-Sports
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'neon-cyan': '0 0 10px #00FFFF, 0 0 20px #00FFFF',
+                        'neon-magenta': '0 0 10px #FF00FF, 0 0 20px #FF00FF',
+                        'neon-cta': '0 0 18px #FF00FF, 0 0 40px #FF00FF, 0 0 60px rgba(255, 0, 255, 0.5)', /* Sombra CTA más intensa */
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Estilo para la fuente Inter (importación) --><link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;900&display=swap" rel="stylesheet">
     <style>
-        /* Estilo global para el aspecto "PRO" y oscuro */
+        /* Estilos generales para un look oscuro y agresivo */
         body {
+            background-color: #0A0A0A; 
+            color: #E5E7EB; 
             font-family: 'Inter', sans-serif;
-            color: #ffffff;
+            overflow-x: hidden;
         }
-        /* ESTILO APLICADO: Fondo de Mosaico de Pac-Man (Icónico y Sutil) */
-        .pacman-background {
-            background-color: #0d1117; /* Fondo negro azulado oscuro */
-            /* Patrón de Repetición de Pac-Man (Minimalista y Sutil) */
-            background-image: 
-                radial-gradient(circle at 50% 50%, rgba(255, 204, 0, 0.1) 15%, transparent 15%), /* Círculo (Cuerpo) */
-                linear-gradient(90deg, transparent 50%, rgba(255, 204, 0, 0.05) 50%); /* Simulación de Mosaico */
-            background-size: 80px 80px; /* Tamaño de la celda de repetición */
-            background-position: 0 0, 40px 40px; /* Desfase para el efecto de mosaico */
-            animation: background-move 40s linear infinite; /* Animación sutil */
+
+        /* Clase para el efecto de texto neón: REDUCIENDO LA INTENSIDAD DE LA SOMBRA */
+        .neon-text-cyan {
+            color: #00FFFF;
+            text-shadow: 0 0 3px #00FFFF, 0 0 8px #00FFFF; /* Sombra más sutil */
         }
-        @keyframes background-move {
-            from { background-position: 0 0, 40px 40px; }
-            to { background-position: 80px 80px, 120px 120px; }
+        .neon-text-magenta {
+            color: #FF00FF;
+            text-shadow: 0 0 3px #FF00FF, 0 0 8px #FF00FF; /* Sombra más sutil */
         }
-        
-        /* Estilo para el botón CTA principal (Impacto y Urgencia) */
+
+        /* Keyframes para el pulso de los botones CTA */
+        @keyframes pulse-neon {
+            0%, 100% {
+                box-shadow: 0 0 8px #FF00FF, 0 0 20px #FF00FF;
+            }
+            50% {
+                box-shadow: 0 0 12px #00FFFF, 0 0 35px #FF00FF;
+            }
+        }
+
+        /* Aplicar animación al botón CTA */
         .cta-button {
-            background-image: linear-gradient(to right, #ef4444, #f97316); /* Rojo a Naranja vibrante */
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 20px rgba(249, 115, 22, 0.8);
+            animation: pulse-neon 2s infinite ease-in-out;
+            transition: all 0.3s ease;
         }
         .cta-button:hover {
-            transform: translateY(-4px); /* Efecto de "salto" */
-            box-shadow: 0 8px 30px rgba(249, 115, 22, 1);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px #FF00FF, 0 0 40px #FF00FF, 0 0 80px rgba(255, 0, 255, 0.8);
         }
-        .highlight {
-            color: #f97316; /* Color naranja fuerte para resaltar */
-            font-weight: 900;
+
+        /* Estilo para iconos de check/SVGs */
+        .icon-check-bg {
+            background-color: #22c55e; 
         }
-        .section-title {
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        
+        /* Estilo para estrellas (Testimonios) */
+        .star-filled {
+            color: #FFD700; 
         }
     </style>
 </head>
-<body class="min-h-screen pacman-background">
+<body class="min-h-screen">
 
-    <!-- CAMBIO CLAVE: Se cambió max-w-md a max-w-xl para más ancho -->
-    <div class="max-w-xl mx-auto p-4 sm:p-6 lg:p-8">
-
-        <!-- SECCIÓN I: ENGANCHE DE ATENCIÓN Y PRUEBA SOCIAL/VISUAL (ABOVE THE FOLD) -->
-        <header class="text-center pt-8 pb-6 bg-gray-900/95 rounded-xl shadow-lg border border-gray-800">
-            <h1 class="text-4xl sm:text-5xl font-extrabold mb-3 leading-tight">
-                "Construye la Máquina Arcade de tu Infancia en un Fin de Semana <span class="highlight">(Aunque nunca hayas tocado un martillo) y ahorrando un 50% en materiales"</span>
+    <!-- HERO SECTION -->
+    <section id="hero" class="py-16 md:py-28 text-center px-4 bg-dark-bg border-b-4 border-neon-cyan/50">
+        <div class="max-w-4xl mx-auto">
+            <!-- Título Principal (Mejor escala en mobile y desktop) -->
+            <h1 class="text-5xl sm:text-7xl lg:text-8xl font-black uppercase leading-tight tracking-tight mb-4">
+                <span class="neon-text-magenta">"Construye tu Tablero</span> Arcade Profesional o Hitbox en Una Tarde:
+                <span class="neon-text-cyan">Planos a Escala 1:1</span> Listos para Imprimir"
             </h1>
-            <h2 class="text-xl sm:text-2xl text-gray-300 mb-6">
-                Distribución de Botones lista para imprimir, diseños editables en PS, guia paso a paso para armado de tablero, LISTA DE PROVEEDORES EN CHINA Y USA <span class="highlight">Arma tu tablero profesional facil y rapido</span>.
+
+            <!-- Subtítulo -->
+            <p class="text-xl sm:text-3xl font-bold mb-10 text-gray-300">
+                Planos 1:1, Diseños PSD y Guía de Componentes. 
+                <span class="block mt-1 neon-text-cyan underline">Ahorra $200 y juega como PRO.</span>
+            </p>
+
+            <!-- Botón CTA Brillante (Principal) -->
+            <a href="#cta-final" class="cta-button inline-block w-full px-12 py-5 text-2xl sm:text-3xl font-black uppercase rounded-xl bg-neon-magenta text-dark-bg transition duration-300 shadow-neon-cta">
+                DESCARGAR PACK POR $9.99
+            </a>
+            <p class="text-sm mt-4 text-gray-400 font-semibold">Garantía de Satisfacción 100% | Acceso Inmediato</p>
+        </div>
+    </section>
+
+    <!-- SECCIÓN DE DOLOR (PROBLEMA) - BLOQUE DE CONTRASTE -->
+    <section id="dolor" class="py-12 px-4 bg-dark-card border-y-2 border-neon-magenta/50">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl sm:text-4xl font-extrabold uppercase mb-4 text-neon-cyan tracking-wider">
+                ¡ALTO! EVITA EL FRACASO
             </h2>
-            
-            <!-- IMÁGENES DE TABLEROS TERMINADOS (IMPACTO VISUAL INMEDIATO) -->
-            <div class="grid grid-cols-2 gap-3 mx-2 mb-6">
-                <!-- REEMPLAZAR con imágenes reales del tablero ensamblado V1 -->
-                <!-- RUTA INCORRECTA POR PETICIÓN: NO FUNCIONARÁ EN WEB -->
-                <img src="https://github.com/ioryomar77-crypto/tablerosarcade/blob/main/imagen1.jpg?raw=true" 
-                     alt="Tablero Arcade One Player terminado con vinilo retro" 
-                     class="w-full h-auto object-cover rounded-lg shadow-2xl border-2 border-orange-600">
-                <!-- REEMPLAZAR con imágenes reales del tablero ensamblado V2 -->
-                <img src="https://github.com/ioryomar77-crypto/tablerosarcade/blob/main/imagen2.jpg?raw=true" 
-                     alt="Tablero Arcade One Player terminado con vinilo moderno" 
-                     class="w-full h-auto object-cover rounded-lg shadow-2xl border-2 border-red-500">
-                <p class="col-span-2 text-sm text-gray-400 mt-2">Así se verá tu proyecto con nuestros diseños y guías.</p>
-            </div>
+            <p class="text-xl sm:text-2xl font-black italic text-white/90">
+                ¿Cansado de planos gratis que no encajan? 
+                <span class="block mt-2 neon-text-magenta underline">Deja de desperdiciar madera y dinero con medidas incorrectas.</span>
+            </p>
+            <!-- Icono de advertencia --><svg class="mx-auto mt-6 w-14 h-14 text-neon-magenta" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.332 16c-.77 1.333.192 3 1.732 3z"></path>
+            </svg>
+        </div>
+    </section>
 
+    <!-- SECCIÓN DE SOLUCIÓN (STACK DE VALOR) -->
+    <section id="solucion" class="py-16 md:py-24 px-4 bg-dark-bg">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl sm:text-5xl font-extrabold uppercase text-center mb-12">
+                El <span class="neon-text-cyan">Arsenal Completo</span> para tu Proyecto
+            </h2>
+            <div class="space-y-8">
+                <!-- Elementos del Stack de Valor: Siempre full-width -->
+                <div class="flex items-center bg-dark-card p-4 sm:p-6 rounded-xl shadow-xl border-l-4 border-neon-cyan transform hover:scale-[1.02] transition duration-300">
+                    <span class="icon-check-bg p-2 rounded-full flex-shrink-0">
+                        <!-- Icono SVG de Check (Verde) --><svg class="w-7 h-7 text-dark-bg" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </span>
+                    <p class="ml-4 text-xl font-black text-gray-200">
+                        <span class="neon-text-cyan">Planos de corte Escala Real 1:1</span> (PDF) - Medidas Exactas Garantizadas.
+                    </p>
+                </div>
 
-            <!-- CONTADOR DE URGENCIA (Funcional con JS) -->
-            <div class="bg-red-800 bg-opacity-30 border border-red-600 rounded-lg p-3 mx-4 mb-6 font-bold text-lg text-red-300">
-                ¡OFERTA RELÁMPAGO! SOLO QUEDAN <span id="countdown-timer" class="text-3xl text-red-300"></span>
-            </div>
-
-            <!-- BOTÓN CTA PRINCIPAL -->
-            <a href="https://www.fatfreecartpro.com/ecom/gb.php?&c=single&cl=433458&i=1892381" 
-               class="cta-button w-11/12 inline-block py-5 text-2xl font-black rounded-full uppercase text-white tracking-widest transition duration-300" 
-               target="_blank">
-                <!-- REEMPLAZAR ESTA URL CON TU ENLACE DE PAGO DIRECTO DE PAYPAL -->
-                ¡COMPRA EL PACK POR SÓLO 9.99$!
-            </a>
-            <p class="text-xs mt-2 text-gray-400">Acceso Inmediato. Deja de perder tiempo, empieza a construir hoy.</p>
-        </header>
-        
-        <!-- SECCIÓN II: CONTENIDO DETALLADO DEL PACK (RESOLUCIÓN DE DUDAS) -->
-        <section class="mt-12">
-            <h3 class="section-title text-center text-3xl font-extrabold mb-8 text-white">
-                📦 Todo lo que Recibes en el <span class="text-orange-400">Pack PRO</span>
-            </h3>
-
-            <div class="grid grid-cols-1 gap-4">
-                
-                <!-- 1. DISEÑOS EDITABLES Y LISTOS PARA IMPRIMIR (Viniles) -->
-                <div class="bg-gray-900/90 rounded-xl p-5 flex flex-col space-y-2 border-l-4 border-yellow-500 hover:shadow-2xl">
-                    <div class="flex items-center space-x-3">
-                        <i data-lucide="paintbrush" class="w-7 h-7 text-yellow-500 flex-shrink-0"></i>
-                        <h4 class="font-extrabold text-xl">Diseños de Vinilo EDITABLES (.PSD)</h4>
-                    </div>
-                    <p class="text-gray-300 text-sm pl-10">Más de 20 diseños pegables listos para imprenta. Abre en Photoshop, ajusta a tu gusto e imprime sin errores.</p>
+                <div class="flex items-center bg-dark-card p-4 sm:p-6 rounded-xl shadow-xl border-l-4 border-neon-magenta transform hover:scale-[1.02] transition duration-300">
+                    <span class="icon-check-bg p-2 rounded-full flex-shrink-0">
+                        <svg class="w-7 h-7 text-dark-bg" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </span>
+                    <p class="ml-4 text-xl font-black text-gray-200">
+                        <span class="neon-text-magenta">Plantillas Hitbox y Stick Clásico</span> - Adaptado a tus preferencias de juego.
+                    </p>
                 </div>
                 
-                <!-- 2. GUÍAS TÉCNICAS Y TALADRADO 1:1 (Construcción/Botones) -->
-                <div class="bg-gray-900/90 rounded-xl p-5 flex flex-col space-y-2 border-l-4 border-red-500 hover:shadow-2xl">
-                    <div class="flex items-center space-x-3">
-                        <i data-lucide="crosshair" class="w-7 h-7 text-red-500 flex-shrink-0"></i>
-                        <h4 class="font-extrabold text-xl">Guía de Taladrado y Construcción (Player 1)</h4>
-                    </div>
-                    <p class="text-gray-300 text-sm pl-10">Plantillas de distribución de botones a escala real (1:1). Guía de armado de tablero que evita tornillos visibles.</p>
-                </div>
-                
-                <!-- 3. PRESUPUESTO Y PROVEEDORES (Mayor Valor) -->
-                <div class="bg-gray-900/90 rounded-xl p-5 flex flex-col space-y-2 border-l-4 border-green-500 hover:shadow-2xl">
-                    <div class="flex items-center space-x-3">
-                        <i data-lucide="dollar-sign" class="w-7 h-7 text-green-500 flex-shrink-0"></i>
-                        <h4 class="font-extrabold text-xl">Presupuestos y Lista de Distribuidores PRO</h4>
-                    </div>
-                    <p class="text-gray-300 text-sm pl-10">Guías de compra (Gama Baja/Media/Alta). Lista de contactos de proveedores confiables en **USA y China**.</p>
+                <div class="flex items-center bg-dark-card p-4 sm:p-6 rounded-xl shadow-xl border-l-4 border-neon-cyan transform hover:scale-[1.02] transition duration-300">
+                    <span class="icon-check-bg p-2 rounded-full flex-shrink-0">
+                        <svg class="w-7 h-7 text-dark-bg" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </span>
+                    <p class="ml-4 text-xl font-black text-gray-200">
+                        Diseños <span class="neon-text-cyan">PSD editables</span> para vinilos - Personaliza tu arte al estilo EVO.
+                    </p>
                 </div>
 
-                <!-- 4. CONFIGURACIÓN Y WALLPAPERS (Imágenes y Software) -->
-                <div class="bg-gray-900/90 rounded-xl p-5 flex flex-col space-y-2 border-l-4 border-blue-500 hover:shadow-2xl">
-                    <div class="flex items-center space-x-3">
-                        <i data-lucide="monitor" class="w-7 h-7 text-blue-500 flex-shrink-0"></i>
-                        <h4 class="font-extrabold text-xl">Kit de Imágenes y Configuración Arcade</h4>
-                    </div>
-                    <p class="text-gray-300 text-sm pl-10">Guía de configuraciones software/hardware y un kit de wallpapers de alta resolución para la pantalla de tu mueble.</p>
+                <div class="flex items-center bg-dark-card p-4 sm:p-6 rounded-xl shadow-xl border-l-4 border-neon-magenta transform hover:scale-[1.02] transition duration-300">
+                    <span class="icon-check-bg p-2 rounded-full flex-shrink-0">
+                        <svg class="w-7 h-7 text-dark-bg" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </span>
+                    <p class="ml-4 text-xl font-black text-gray-200">
+                        Guía de Componentes (Gama Baja a Alta) - <span class="neon-text-magenta">Elige sin errores</span> tus botones y palancas.
+                    </p>
+                </div>
+
+                <div class="flex items-center bg-dark-card p-4 sm:p-6 rounded-xl shadow-xl border-l-4 border-neon-cyan transform hover:scale-[1.02] transition duration-300">
+                    <span class="icon-check-bg p-2 rounded-full flex-shrink-0">
+                        <svg class="w-7 h-7 text-dark-bg" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </span>
+                    <p class="ml-4 text-xl font-black text-gray-200">
+                        <span class="neon-text-cyan">Lista Secreta de Proveedores</span> fiables - ¡Compra Calidad y olvídate de aduanas!
+                    </p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
+    <!-- PRUEBA SOCIAL / VISUAL (MOCKUPS DE FIGHTSTICKS) -->
+    <section id="mockups-fightsticks" class="py-16 md:py-24 px-4 bg-dark-card border-y-4 border-neon-magenta/50">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl sm:text-5xl font-extrabold uppercase mb-10 text-neon-magenta">
+                RESULTADOS A NIVEL PRO
+            </h2>
+            <!-- Imagen principal de un fightstick/hitbox de torneo --><img src="https://image.pollinations.ai/prompt/professional,fightstick,and,hitbox,controller,side-by-side,with,glowing,LEDs,minimalist,sleek,dark,e-sports,tournament,quality,high-resolution" alt="Fightstick y Hitbox de torneo de alta calidad" class="w-full h-auto rounded-lg shadow-neon-cyan mb-12 border-2 border-neon-cyan/80 object-cover">
 
-        <!-- SECCIÓN III: MUESTRA DE DISEÑOS RAW (PRUEBA VISUAL DE CALIDAD) -->
-        <section class="mt-12">
-            <h3 class="section-title text-center text-3xl font-bold mb-6 text-orange-400">
-                🖼️ Galería: Archivos Editables y Wallpapers
-            </h3>
+            <!-- Grid de 3 Mockups: Estrictamente 1 columna -->
+            <div class="grid grid-cols-1 gap-8">
+                <!-- Mockup 1: Fightstick minimalista con LEDs y acentos cian --><div class="bg-gray-800 p-4 rounded-xl shadow-neon-cyan/50 shadow-xl border-2 border-neon-cyan/80">
+                    <img src="https://image.pollinations.ai/prompt/minimalist,professional,fightstick,with,cyan,LEDs,dark,background,e-sports,style,high-quality" alt="Fightstick minimalista con LEDs cian" class="w-full h-auto rounded-lg mb-2 object-cover">
+                    <p class="text-base font-semibold text-gray-400 mt-2">Modelo Arcade Stick Clásico con Iluminación</p>
+                </div>
+                <!-- Mockup 2: Hitbox profesional con LEDs y acentos magenta (Destacado) --><div class="bg-gray-800 p-4 rounded-xl shadow-neon-magenta shadow-2xl border-2 border-neon-magenta">
+                    <img src="https://image.pollinations.ai/prompt/professional,hitbox,controller,with,magenta,LEDs,sleek,design,dark,e-sports,aesthetic,high-quality" alt="Hitbox profesional con LEDs magenta" class="w-full h-auto rounded-lg mb-2 object-cover">
+                    <p class="text-base font-semibold text-gray-400 mt-2">Modelo Hitbox Ultra Compacto con LEDs</p>
+                </div>
+                <!-- Mockup 3: Fightstick personalizado con LEDs multicolor y estilo agresivo --"><div class="bg-gray-800 p-4 rounded-xl shadow-neon-cyan/50 shadow-xl border-2 border-neon-cyan/80">
+                    <img src="https://image.pollinations.ai/prompt/custom,fightstick,aggressive,design,with,multicolor,LEDs,professional,tournament,look,dark,setting" alt="Fightstick personalizado con LEDs multicolor" class="w-full h-auto rounded-lg mb-2 object-cover">
+                    <p class="text-base font-semibold text-gray-400 mt-2">Diseño Personalizado KOF Style con LEDs</p>
+                </div>
+            </div>
+            <p class="mt-10 text-2xl font-black text-gray-300">
+                Deja de soñar. Empieza a construir con precisión <span class="neon-text-cyan">HOY</span>.
+            </p>
+        </div>
+    </section>
+
+    <!-- NUEVA SECCIÓN: DISEÑOS DE VINILOS Y WALLPAPERS -->
+    <section id="vinilos-wallpapers" class="py-16 px-4 bg-dark-bg border-y-4 border-neon-cyan/50">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl sm:text-5xl font-extrabold uppercase mb-10 text-neon-cyan">
+                DISEÑOS EXCLUSIVOS PARA <span class="neon-text-magenta">VINILOS Y WALLPAPERS</span>
+            </h2>
+            <p class="text-lg text-gray-300 mb-12">Personaliza tu Fight Stick y tu setup con arte de alta calidad.</p>
             
-            <!-- GALERÍA DE VINILOS Y FONDOS -->
-            <div class="grid grid-cols-2 gap-4">
-                <!-- PSD 1: Diseño Fuego (RAW) -->
-                <div class="bg-gray-900/90 rounded-xl shadow-xl overflow-hidden transform hover:scale-105 transition duration-300">
-                    <!-- REEMPLAZAR con imagen real del PSD de vinilo -->
-                    <img src="https://github.com/ioryomar77-crypto/tablerosarcade/blob/main/7.jpg?raw=true" 
-                         alt="Diseño editable de vinilo en formato Photoshop" 
-                         class="w-full h-auto object-cover">
-                    <p class="text-center text-sm p-2 font-semibold text-gray-300">Editable PSD Retro</p>
+            <!-- Grid de Vinilos: Estrictamente 1 columna -->
+            <div class="grid grid-cols-1 gap-8">
+                <!-- Diseño de Vinilo 1 --><div class="bg-gray-800 p-4 rounded-xl shadow-neon-magenta/50 shadow-xl border-2 border-neon-magenta/80">
+                    <img src="https://image.pollinations.ai/prompt/arcade,stick,vinyl,design,minimalist,e-sports,cyberpunk,cyan,magenta,gradient,dark,background,high-quality" alt="Diseño de vinilo arcade cyberpunk" class="w-full h-auto rounded-lg mb-2 object-cover">
+                    <p class="text-sm font-semibold text-gray-400">Vinilo "Cyber-Fighter" (Editable)</p>
                 </div>
-                <!-- PSD 2: Diseño Manga (RAW) -->
-                <div class="bg-gray-900/90 rounded-xl shadow-xl overflow-hidden transform hover:scale-105 transition duration-300">
-                    <!-- REEMPLAZAR con imagen real del PSD de vinilo -->
-                    <img src="https://github.com/ioryomar77-crypto/tablerosarcade/blob/main/4.jpg?raw=true" 
-                         alt="Diseño editable de vinilo en formato Photoshop" 
-                         class="w-full h-auto object-cover">
-                    <p class="text-center text-sm p-2 font-semibold text-gray-300">Editable PSD Manga</p>
+                <!-- Diseño de Vinilo 2 --><div class="bg-gray-800 p-4 rounded-xl shadow-neon-cyan/50 shadow-xl border-2 border-neon-cyan/80">
+                    <img src="https://image.pollinations.ai/prompt/hitbox,vinyl,art,abstract,geometric,neon,glow,dark,mode,professional,gaming,graphic,high-quality" alt="Diseño de vinilo hitbox geométrico" class="w-full h-auto rounded-lg mb-2 object-cover">
+                    <p class="text-sm font-semibold text-gray-400">Arte para Hitbox "Geometric Glow"</p>
                 </div>
-                <!-- Wallpaper 1: Fondo Arcade -->
-                <div class="bg-gray-900/90 rounded-xl shadow-xl overflow-hidden transform hover:scale-105 transition duration-300">
-                    <!-- REEMPLAZAR con imagen real del Wallpaper -->
-                    <img src=https://github.com/ioryomar77-crypto/tablerosarcade/blob/main/5.jpg?raw=true" 
-                         alt="Fondo de pantalla de alta resolución para mueble arcade" 
-                         class="w-full h-auto object-cover">
-                    <p class="text-center text-sm p-2 font-semibold text-gray-300">Fondo Arcade HD</p>
-                </div>
-                <!-- Wallpaper 2: Fondo Neón -->
-                <div class="bg-gray-900/90 rounded-xl shadow-xl overflow-hidden transform hover:scale-105 transition duration-300">
-                    <!-- REEMPLAZAR con imagen real del Wallpaper -->
-                    <img src="https://github.com/ioryomar77-crypto/tablerosarcade/blob/main/6.jpg?raw=true" 
-                         alt="Fondo de pantalla de alta resolución con estilo Neón" 
-                         class="w-full h-auto object-cover">
-                    <p class="text-center text-sm p-2 font-semibold text-gray-300">Fondo Neón Cyber</p>
+                <!-- Diseño de Vinilo 3 (o Wallpaper) --><div class="bg-gray-800 p-4 rounded-xl shadow-neon-magenta/50 shadow-xl border-2 border-neon-magenta/80">
+                    <img src="https://image.pollinations.ai/prompt/gaming,wallpaper,kof,evo,inspired,neon,characters,minimalist,dark,background,high-resolution" alt="Wallpaper KOF/EVO inspirado" class="w-full h-auto rounded-lg mb-2 object-cover">
+                    <p class="text-sm font-semibold text-gray-400">Wallpaper "KOF Arena" (HD)</p>
                 </div>
             </div>
-            <p class="text-center text-sm text-gray-400 mt-4">Todo en máxima calidad, listo para que lo uses al instante.</p>
-        </section>
+        </div>
+    </section>
 
-
-        <!-- SECCIÓN IV: MARCAS Y AUTORIDAD -->
-        <section class="mt-12 text-center">
-            <h3 class="section-title text-2xl font-bold mb-5 text-gray-300">
-                ✅ COMPONENTES CUBIERTOS EN LA GUÍA
-            </h3>
+    <!-- NUEVA SECCIÓN: DISEÑOS DE DISTRIBUCIÓN DE BOTONES -->
+    <section id="layouts-botones" class="py-16 px-4 bg-dark-card border-y-4 border-neon-magenta/50">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl sm:text-5xl font-extrabold uppercase mb-10 text-neon-magenta">
+                DISEÑOS DE <span class="neon-text-cyan">DISTRIBUCIÓN DE BOTONES</span>
+            </h2>
+            <p class="text-lg text-gray-300 mb-12">Encuentra el layout perfecto para tu estilo de juego.</p>
             
-            <div class="flex flex-wrap justify-center items-center gap-4 p-4 bg-gray-900/90 rounded-2xl shadow-xl border border-gray-700">
-                <!-- Marca 1: Sanwa (Joystick Japonés) -->
-                <div class="w-1/4 sm:w-1/5">
-                    <!-- REEMPLAZAR con Logo de Sanwa -->
-                    <img src="https://placehold.co/100x40/000000/ffffff?text=SANWA" alt="Logo de Joystick Sanwa Denshi" class="h-8 sm:h-10 w-full object-contain filter grayscale hover:grayscale-0 transition">
-                    <p class="text-xs text-gray-400 mt-1">Gama Alta</p>
+            <!-- Grid de Layouts: Estrictamente 1 columna -->
+            <div class="grid grid-cols-1 gap-8">
+                <!-- Layout Americano --><div class="bg-gray-800 p-4 rounded-xl shadow-neon-cyan/50 shadow-xl border-2 border-neon-cyan/80">
+                    <img src="https://image.pollinations.ai/prompt/arcade,stick,button,layout,american,style,standard,classic,diagram,dark,background,schematic,minimalist" alt="Layout de botones americano" class="w-full h-auto rounded-lg mb-2 object-cover">
+                    <p class="text-sm font-semibold text-gray-400">Distribución Americana Clásica</p>
                 </div>
-                <!-- Marca 2: Seimitsu (Joystick Japonés) -->
-                <div class="w-1/4 sm:w-1/5">
-                    <!-- REEMPLAZAR con Logo de Seimitsu -->
-                    <img src="https://placehold.co/100x40/000000/ffffff?text=SEIMITSU" alt="Logo de Joystick Seimitsu" class="h-8 sm:h-10 w-full object-contain filter grayscale hover:grayscale-0 transition">
-                    <p class="text-xs text-gray-400 mt-1">Gama Alta</p>
+                <!-- Layout Japonés --><div class="bg-gray-800 p-4 rounded-xl shadow-neon-magenta/50 shadow-xl border-2 border-neon-magenta/80">
+                    <img src="https://image.pollinations.ai/prompt/arcade,stick,button,layout,japanese,vewlix,style,diagram,dark,background,schematic,minimalist" alt="Layout de botones japonés" class="w-full h-auto rounded-lg mb-2 object-cover">
+                    <p class="text-sm font-semibold text-gray-400">Distribución Japonesa (Vewlix)</p>
                 </div>
-                <!-- Marca 3: HAPP/Industrias Lorenzo (Americano/Español) -->
-                <div class="w-1/4 sm:w-1/5">
-                    <!-- REEMPLAZAR con Logo de HAPP -->
-                    <img src="https://placehold.co/100x40/000000/ffffff?text=GENERICOS" alt="Logo de HAPP Controls" class="h-8 sm:h-10 w-full object-contain filter grayscale hover:grayscale-0 transition">
-                    <p class="text-xs text-gray-400 mt-1">Industrial</p>
-                </div>
-                <!-- Marca 4: BROOK (Interfaces) -->
-                <div class="w-1/4 sm:w-1/5">
-                    <!-- REEMPLAZAR con Logo de BROOK -->
-                    <img src="https://placehold.co/100x40/000000/ffffff?text=BROOK" alt="Logo de Brook Gaming Interface" class="h-8 sm:h-10 w-full object-contain filter grayscale hover:grayscale-0 transition">
-                    <p class="text-xs text-gray-400 mt-1">Interfaz PRO</p>
+                <!-- Layout Hitbox --><div class="bg-gray-800 p-4 rounded-xl shadow-neon-cyan/50 shadow-xl border-2 border-neon-cyan/80">
+                    <img src="https://image.pollinations.ai/prompt/hitbox,controller,button,layout,diagram,minimalist,clean,dark,background,schematic" alt="Layout de botones hitbox" class="w-full h-auto rounded-lg mb-2 object-cover">
+                    <p class="text-sm font-semibold text-gray-400">Distribución Hitbox</p>
                 </div>
             </div>
-            <p class="text-sm mt-3 text-gray-400">Guías de conexión y proveedores verificados para estas marcas.</p>
-        </section>
+        </div>
+    </section>
 
-
-        <!-- SECCIÓN V: CIERRE, PRECIO Y GARANTÍA -->
-        <section class="text-center bg-gray-900/90 p-6 rounded-2xl shadow-2xl border border-red-700 mt-12">
-            <p class="text-xl text-gray-300 mb-2">¡Deja de buscar y empieza a construir! Accede hoy por:</p>
-            <p class="text-5xl font-extrabold line-through text-red-500 mb-1">40$</p>
-            <p class="text-7xl font-extrabold text-orange-400 mb-6">
-                <span class="text-white">9.99$</span>
+    <!-- NUEVA SECCIÓN: COMENTARIOS Y PRUEBA SOCIAL (COLUMNA ÚNICA) -->
+    <section id="testimonios" class="py-16 md:py-24 px-4 bg-darker-card border-y-4 border-neon-cyan/50">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl sm:text-5xl font-extrabold uppercase mb-6 text-neon-magenta">
+                +1,000 MAESTROS YA ESTÁN ARMANDO
+            </h2>
+            <p class="text-xl font-black text-gray-300 mb-12">
+                Escucha lo que dicen los jugadores que dejaron de perder tiempo y dinero.
             </p>
 
-            <!-- BOTÓN CTA FINAL (Repetido para el cierre) -->
-            <a href="https://www.fatfreecartpro.com/ecom/gb.php?&c=single&cl=433458&i=1892381" 
-               class="cta-button w-full inline-block py-5 text-3xl font-black rounded-full uppercase text-white tracking-wider transition duration-300" 
-               target="_blank">
-                COMPRAR Y DESCARGAR AHORA
-            </a>
+            <!-- Grid de Testimonios: Estrictamente 1 columna -->
+            <div class="grid grid-cols-1 gap-8">
+                <!-- Testimonio 1: Resuelve dolor y ahorra dinero (Anclaje de valor) -->
+                <div class="bg-dark-card p-6 rounded-xl shadow-neon-cyan/50 border border-neon-cyan/50 text-left transition duration-300 hover:scale-[1.03]">
+                    <div class="flex items-center mb-3">
+                        <span class="star-filled text-2xl mr-2">★★★★★</span>
+                        <p class="font-bold text-lg text-neon-cyan">- Kyo_M</p>
+                    </div>
+                    <p class="text-lg italic text-gray-200 mb-4">
+                        "Dejé de botar dinero en madera y componentes por planos que no cuadraban. Estos diseños **encajaron perfectos a la primera**. ¡Literalmente me ahorré más de $150 en errores! La compra más inteligente del año."
+                    </p>
+                    <p class="text-sm font-light text-gray-500">(Jugador Verificado, EVO 2024)</p>
+                </div>
 
-            <p class="base font-semibold mt-4 text-green-400">
-                GARANTÍA DE ÉXITO. Tu proyecto terminado al 100% o te devolvemos tu dinero.
+                <!-- Testimonio 2: Autoridad y Componente Secreto (La Lista de Proveedores) -->
+                <div class="bg-dark-card p-6 rounded-xl shadow-neon-magenta/50 border border-neon-magenta/50 text-left transition duration-300 hover:scale-[1.03]">
+                    <div class="flex items-center mb-3">
+                        <span class="star-filled text-2xl mr-2">★★★★★</span>
+                        <p class="font-bold text-lg text-neon-magenta">- Daigo_Fan</p>
+                    </div>
+                    <p class="text-lg italic text-gray-200 mb-4">
+                        "Mi Fight Stick se ve y se siente como un producto de alta gama. Lo mejor de todo es la **'Lista Secreta de Proveedores'**. Es oro puro, conseguí mis componentes de torneo al mejor precio y sin aduanas. Calidad asegurada."
+                    </p>
+                    <p class="text-sm font-light text-gray-500">(Streamer y Modder)</p>
+                </div>
+                
+                <!-- Testimonio 3: Facilidad de uso para principiantes y valor 1:1 -->
+                <div class="bg-dark-card p-6 rounded-xl shadow-neon-cyan/50 border border-neon-cyan/50 text-left transition duration-300 hover:scale-[1.03]">
+                    <div class="flex items-center mb-3">
+                        <span class="star-filled text-2xl mr-2">★★★★★</span>
+                        <p class="font-bold text-lg text-neon-cyan">- Akuma_Rage</p>
+                    </div>
+                    <p class="text-lg italic text-gray-200 mb-4">
+                        "No soy carpintero y estaba asustado, pero la **guía 1:1 es a prueba de errores**. Corté las piezas sin problemas y mi Hitbox quedó impecable. Un pack de $9.99 que me dio las herramientas de un profesional. ¡Impresionante!"
+                    </p>
+                    <p class="text-sm font-light text-gray-500">(Primer Constructor)</p>
+                </div>
+
+                <!-- Testimonio 4: Énfasis en performance (Hitbox) y resultados rápidos -->
+                <div class="bg-dark-card p-6 rounded-xl shadow-neon-magenta/50 border border-neon-magenta/50 text-left transition duration-300 hover:scale-[1.03]">
+                    <div class="flex items-center mb-3">
+                        <span class="star-filled text-2xl mr-2">★★★★★</span>
+                        <p class="font-bold text-lg text-neon-magenta">- Punk_Z</p>
+                    </div>
+                    <p class="text-lg italic text-gray-200 mb-4">
+                        "El plano del Hitbox es **ergonómico y letal**. Subí de rango en mi juego de lucha principal en solo 3 días gracias a la precisión. Si buscas ser serio en el FGC, este pack es una inversión que se paga sola."
+                    </p>
+                    <p class="text-sm font-light text-gray-500">(High Elo Player)</p>
+                </div>
+            </div>
+            
+            <p class="mt-12 text-2xl sm:text-3xl font-black text-white/90 uppercase tracking-wide">
+                <span class="neon-text-cyan">NO PIERDAS MÁS TIEMPO.</span> LA OFERTA TERMINA PRONTO.
             </p>
-        </section>
+        </div>
+    </section>
+    
+    <!-- CIERRE Y OFERTA FINAL -->
+    <section id="cta-final" class="py-16 md:py-24 px-4 text-center bg-dark-bg">
+        <div class="max-w-xl mx-auto">
+            <!-- Texto de Oferta --><h2 class="text-4xl sm:text-5xl font-extrabold uppercase mb-6 text-neon-magenta">
+                ¡OFERTA <span class="neon-text-cyan">POR TIEMPO</span> LIMITADO!
+            </h2>
 
-        <footer class="text-center text-xs text-gray-500 py-8">
-            <p>&copy; 2025 KOF Academy. Todos los derechos reservados.</p>
-        </footer>
+            <!-- Bloque de Precio --><div class="mb-10 p-6 rounded-xl bg-dark-card shadow-2xl border border-neon-cyan/70">
+                <p class="text-3xl font-bold text-gray-500 line-through mb-2">
+                    Precio Regular: ~~$85~~
+                </p>
+                <p class="text-7xl sm:text-8xl font-black uppercase tracking-widest leading-none">
+                    SÓLO <span class="neon-text-cyan">$9.99</span>
+                </p>
+            </div>
 
-    </div>
+            <!-- Botón Final Gigante CTA --><a href="#" class="cta-button inline-block w-full px-12 py-6 text-3xl sm:text-4xl font-black uppercase rounded-xl bg-neon-magenta text-dark-bg transition duration-300 shadow-neon-cta">
+                ACCESO INMEDIATO - EMPIEZA A ARMAR HOY
+            </a>
+            
+            <!-- Iconos de Pago Seguro: CORRECCIÓN DE LEGIBILIDAD -->
+            <div class="mt-8 text-2xl text-gray-400 flex justify-center items-center space-x-4">
+                <p class="text-base uppercase font-black text-gray-500 mr-4">PAGO SEGURO:</p>
+                
+                <!-- Ícono de Tarjeta (VISA/Mastercard) -->
+                <svg class="w-8 h-8 text-neon-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                </svg>
+                
+                <!-- Ícono de PayPal -->
+                <svg class="w-8 h-8 text-neon-magenta" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9H7a4 4 0 00-4 4v4a2 2 0 002 2h14a2 2 0 002-2v-4a4 4 0 00-4-4zM7 9V5a2 2 0 012-2h6a2 2 0 012 2v4"></path>
+                </svg>
+                
+                <!-- Texto de Marcas de Pago (Siempre visibles en móvil) -->
+                <span class="font-black text-neon-cyan text-base">VISA</span>
+                <span class="font-black text-neon-magenta text-base">PAYPAL</span> <!-- Se agregó PAYPAL explícitamente -->
+            </div>
+            
+        </div>
+    </section>
 
-    <script>
-        // Función para simular el contador regresivo
-        function startCountdown() {
-            const countdownEl = document.getElementById('countdown-timer');
-            // Tiempo inicial de 10 minutos (600 segundos)
-            let timeInSeconds = 600; 
+    <!-- FOOTER SIMPLE --><footer class="text-center py-6 text-xs text-gray-600 bg-dark-card border-t border-gray-800">
+        <div class="max-w-7xl mx-auto">
+            <p>&copy; 2024 Pack Maestro Arcade. Todos los derechos reservados. | Producto Digital | <a href="#" class="hover:text-neon-cyan transition duration-200">Términos y Condiciones</a></p>
+        </div>
+    </footer>
 
-            function updateTimer() {
-                const minutes = String(Math.floor(timeInSeconds / 60)).padStart(2, '0');
-                const seconds = String(timeInSeconds % 60).padStart(2, '0');
-
-                countdownEl.textContent = `${minutes}:${seconds}`;
-
-                if (timeInSeconds <= 0) {
-                    clearInterval(timerInterval);
-                    countdownEl.textContent = "00:00";
-                    // En un escenario real, aquí se deshabilitaría el botón de compra
-                } else {
-                    timeInSeconds--;
-                }
-                // Asegurar que Lucide Icons se rendericen
-                if (typeof lucide !== 'undefined') {
-                    lucide.createIcons();
-                }
-            }
-
-            // Actualizar el contador cada segundo
-            const timerInterval = setInterval(updateTimer, 1000);
-            updateTimer(); // Llamar inmediatamente para evitar un retraso de 1s
-        }
-
-        // Iniciar el contador cuando la página cargue
-        startCountdown();
-    </script>
 </body>
 </html>
